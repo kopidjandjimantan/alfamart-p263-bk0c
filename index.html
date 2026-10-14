@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ALFAMART BK0C P263 — Klerek Style</title>
+<style>
+:root{--bg:#07090e;--panel:#11151d;--line:#c9cbd0;--blue:#1764ff;--white:#f7f7f8;--muted:#9ca3af}
+*{box-sizing:border-box}body{margin:0;background:linear-gradient(180deg,#293241 0,#11151d 34%,#050608 100%);color:var(--white);font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+.top{padding:8px 12px 0}.nav{max-width:900px;margin:0 auto 28px;background:#030711;border-radius:12px;min-height:94px;display:grid;grid-template-columns:70px 1fr 55px;align-items:center;padding:10px 18px;box-shadow:0 8px 25px #0005}
+.menu{font-size:34px;line-height:1;color:#ddd}.brand{text-align:center;font-family:Georgia,serif;font-weight:bold;font-size:clamp(25px,5vw,42px);letter-spacing:-1px;border-top:5px double #fff;border-bottom:5px double #fff;border-radius:14px;padding:3px 0 6px;justify-self:center}.user{text-align:right;color:#ddd;font-size:18px}
+main{width:min(900px,calc(100% - 28px));margin:0 auto 40px}.card{border:1.5px solid var(--line);border-radius:17px;overflow:hidden;margin:0 0 42px;background:linear-gradient(160deg,#1d2532,#080a0e 85%);box-shadow:0 12px 28px #0002}
+.cardhead{background:linear-gradient(100deg,#030303,#737985 52%,#030303);padding:23px 28px;display:flex;align-items:center;justify-content:space-between;gap:14px;border-bottom:1px solid var(--line);font-size:clamp(20px,4vw,30px);font-weight:700}
+.pill{background:#fff;color:#07090e;border-radius:30px;padding:10px 22px;font-size:20px;white-space:nowrap}
+.summary{padding:25px 28px 28px}.row{display:grid;grid-template-columns:minmax(120px,1fr) minmax(0,2fr);gap:14px;align-items:center;padding:22px 0;border-bottom:1px solid #e2e2e2;font-size:clamp(17px,3.5vw,26px)}.row:last-child{border:0}.label{color:#c2c6ce}.value{text-align:right;overflow-wrap:anywhere}.total .value{color:var(--blue);font-weight:800;font-size:clamp(22px,4.5vw,34px)}
+.detailhead{align-items:center}.search{width:min(60%,390px);min-width:125px;border:0;border-radius:12px;padding:10px 13px;font:inherit;font-size:18px;color:#111;background:#fff}
+.receipt{border-bottom:1px solid var(--line)}.receipt summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;gap:12px;align-items:center;padding:23px 28px;font-size:clamp(18px,3.5vw,26px)}.receipt summary::-webkit-details-marker{display:none}.chevron{font-size:24px}.receiptbody{padding:0 28px 24px;color:#d1d5db;font-size:14px;overflow:auto}.receiptbody table{border-collapse:collapse;width:100%;font-size:13px}.receiptbody td,.receiptbody th{border-bottom:1px solid #454b55;padding:9px;text-align:left;white-space:nowrap}
+.upload{background:#fff;color:#111827;border-radius:12px;padding:18px;margin-bottom:25px;font-family:Arial,sans-serif}.upload h2{margin:0 0 8px;font-size:18px}.upload p{color:#667085;font-size:13px;line-height:1.45}.upload input{max-width:100%;margin:8px 0}.btn{border:0;border-radius:9px;padding:11px 16px;background:#2563eb;color:#fff;font-weight:700;cursor:pointer}.btn.secondary{background:#eef2f7;color:#344054}.actions{display:flex;gap:9px;flex-wrap:wrap}.status{font-size:13px;line-height:1.5;margin-top:10px;color:#a7f3d0;overflow-wrap:anywhere}.status.bad{color:#fcd34d}
+.empty{padding:22px 28px;color:#b5bac4;font-size:14px;line-height:1.5}.small{font-size:12px;color:#a8adb7}
+.receipt-paper{background:#fff;color:#111;padding:10px 9px;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;white-space:pre-wrap;overflow-wrap:anywhere;font-size:clamp(11px,2.8vw,16px);line-height:1.45;max-height:560px;overflow:auto}
+.totalbox{padding:18px 24px;background:linear-gradient(100deg,#08090c,#252a34);border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:12px;align-items:center;font-size:clamp(16px,3.4vw,24px)}
+.totalbox strong{color:var(--blue);font-size:clamp(21px,4vw,30px);text-align:right}
+
+@media(max-width:520px){.nav{grid-template-columns:42px 1fr 35px;min-height:84px;padding:10px 14px;margin-bottom:25px}.menu{font-size:30px}.user{font-size:16px}.brand{font-size:clamp(24px,7vw,33px)}main{width:calc(100% - 28px)}.cardhead{padding:20px 18px}.summary{padding:18px 20px 20px}.row{grid-template-columns: minmax(90px,1fr) minmax(0,1.6fr);gap:8px;padding:19px 0}.receipt summary{padding:21px 18px}.receiptbody{padding:0 18px 20px}.detailhead{flex-wrap:wrap}.search{width:100%;max-width:none}.pill{font-size:17px;padding:8px 17px}}
+</style>
+</head>
+<body>
+<div class="top"><header class="nav"><div class="menu" aria-label="Menu">☰</div><div class="brand">Klerek App</div><div class="user">MM</div></header></div>
+<main>
+<div class="actions" style="margin:0 0 18px;justify-content:flex-end"><button class="btn secondary" id="adminOpen">Login Admin</button><button class="btn secondary" id="adminLogout" style="display:none">Logout</button></div>
+<section id="adminLogin" class="upload" style="display:none"><h2>Login Admin</h2><p>Login hanya untuk admin yang terdaftar.</p><label>Username</label><br><input id="adminUsername" autocomplete="username" placeholder="Username"><br><label>Password</label><br><input id="adminPassword" type="password" autocomplete="current-password" placeholder="Password"><br><div class="actions"><button class="btn" id="adminSubmit">Login</button><button class="btn secondary" id="adminCancel">Batal</button></div><div id="loginStatus" class="status"></div></section>
+<section id="uploadPanel" class="upload" style="display:none">
+<h2>Upload Database P263</h2><p>Pilih file backup ZIP atau DB. Data akan diproses di browser ini; gunakan hanya backup yang memang boleh kamu akses.</p>
+<input id="file" type="file" accept=".zip,.db,.sqlite,.sqlite3,.dat,*/*">
+<div class="actions"><button class="btn" id="process" disabled>Process</button><button class="btn secondary" id="reset">Reset</button></div>
+<div id="status" class="status">Belum ada file dipilih.</div>
+</section>
+<section class="card">
+<div class="cardhead"><span>Rekap Klerek</span><span class="pill">LZ01</span></div>
+<div class="summary">
+<div class="row"><div class="label">Toko</div><div class="value" id="store">BK 0 CIPTA MUDA/F [BK0C] P263</div></div>
+<div class="row"><div class="label">User ID</div><div class="value" id="userid">—</div></div>
+<div class="row"><div class="label">Tanggal Transaksi</div><div class="value" id="date">—</div></div>
+<div class="row total"><div class="label">Total Transaksi Tunai + Topup Flazz</div><div class="value" id="total">Rp0</div></div>
+</div></section>
+<section class="card">
+<div class="cardhead detailhead"><span>Detail<br>Per Struk</span><input class="search" id="search" placeholder="Search" aria-label="Cari nomor struk"></div>
+<div id="receipts"><div class="empty">Unggah file backup yang kompatibel untuk melihat detail transaksi per struk. Jika database tidak berisi data transaksi yang bisa dikenali, bagian ini akan tetap kosong.</div></div>
+</section>
+<section class="card" id="illustrationCard">
+<div class="cardhead"><span>Ilustrasi Struk</span><span class="pill" id="receiptTag">----</span></div>
+<div class="receipt-paper" id="receiptPaper">Pilih salah satu nomor struk pada bagian Detail Per Struk untuk menampilkan ilustrasi struk.</div>
+<div class="totalbox"><span>Total Transaksi</span><strong id="receiptTotal">Rp0</strong></div>
+</section>
+<section class="card">
+<div class="cardhead"><span>Daftar Tabel Database</span></div><div id="tables" class="empty">Tabel database akan muncul setelah file berhasil dibaca.</div>
+</section>
+<p class="small">Catatan: desain ini meniru gaya visual pada screenshot referensi. Data rekap hanya akan diisi jika struktur dan kolom pada database dapat dikenali; nilai contoh tidak dibuat-buat.</p>
+</main>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.10.3/sql-wasm.js"></script>
+<script>
+let adminAuthenticated=false;
+async function refreshAdmin(){
+ try{const r=await fetch('/api/session',{credentials:'same-origin'});const j=await r.json();adminAuthenticated=!!j.authenticated;}
+ catch(e){adminAuthenticated=false;}
+ document.getElementById('uploadPanel').style.display=adminAuthenticated?'block':'none';
+ document.getElementById('adminOpen').style.display=adminAuthenticated?'none':'inline-block';
+ document.getElementById('adminLogout').style.display=adminAuthenticated?'inline-block':'none';
+}
+document.getElementById('adminOpen').onclick=()=>document.getElementById('adminLogin').style.display='block';
+document.getElementById('adminCancel').onclick=()=>document.getElementById('adminLogin').style.display='none';
+document.getElementById('adminSubmit').onclick=async()=>{
+ const status=document.getElementById('loginStatus');status.textContent='Memeriksa login...';
+ try{
+  const r=await fetch('/api/login',{method:'POST',headers:{'Content-Type':'application/json'},credentials:'same-origin',body:JSON.stringify({username:document.getElementById('adminUsername').value,password:document.getElementById('adminPassword').value})});
+  const j=await r.json();if(!r.ok)throw new Error(j.error||'Login gagal');
+  status.textContent='Login berhasil.';document.getElementById('adminLogin').style.display='none';document.getElementById('adminPassword').value='';await refreshAdmin();
+ }catch(e){status.textContent=e.message;}
+};
+document.getElementById('adminLogout').onclick=async()=>{await fetch('/api/logout',{method:'POST',credentials:'same-origin'});await refreshAdmin();};
+</script>
+<script>
+const $=id=>document.getElementById(id);let SQL=null,db=null,zipFiles=[],currentReceiptTotal=0;
+const isDb=n=>/\.(db|sqlite|sqlite3|dat)$/i.test(n);
+$('file').addEventListener('change',()=>{$('process').disabled=!$('file').files[0];$('status').textContent=$('file').files[0]?`Dipilih: ${$('file').files[0].name}`:'Belum ada file dipilih.';$('status').className='status'});
+$('reset').onclick=()=>{ $('file').value='';$('process').disabled=true;$('status').textContent='Belum ada file dipilih.';$('receipts').innerHTML='<div class="empty">Unggah file backup yang kompatibel untuk melihat detail transaksi per struk.</div>';$('tables').textContent='Tabel database akan muncul setelah file berhasil dibaca.';$('userid').textContent='—';$('date').textContent='—';$('total').textContent='Rp0';$('receiptTag').textContent='----';$('receiptPaper').textContent='Pilih salah satu nomor struk pada bagian Detail Per Struk untuk menampilkan ilustrasi struk.';$('receiptTotal').textContent='Rp0';if(db){db.close();db=null;}zipFiles=[];};
+$('process').onclick=async()=>{const f=$('file').files[0];if(!f)return;$('process').disabled=true;try{const bytes=new Uint8Array(await f.arrayBuffer());if(f.name.toLowerCase().endsWith('.zip')||(bytes[0]===80&&bytes[1]===75)){if(!window.JSZip)throw Error('Pustaka ZIP belum termuat. Pastikan internet aktif.');const z=await JSZip.loadAsync(bytes);zipFiles=Object.values(z.files).filter(e=>!e.dir);const candidates=zipFiles.filter(e=>isDb(e.name));$('status').textContent=`ZIP terbuka: ${zipFiles.length} file ditemukan; ${candidates.length} file ber-ekstensi database.`;if(!candidates.length){$('status').className='status bad';return;}const pick=candidates.find(e=>/p263|android/i.test(e.name))||candidates[0];const b=await pick.async('uint8array');await openDb(b,pick.name);}else await openDb(bytes,f.name);}catch(e){$('status').className='status bad';$('status').textContent='Gagal memproses: '+e.message;}finally{$('process').disabled=!$('file').files[0];}};
+async function openDb(bytes,name){
+ if(!window.initSqlJs)throw Error('Pustaka SQLite belum termuat. Periksa koneksi internet.');
+ if(!SQL)SQL=await initSqlJs({locateFile:f=>'https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.10.3/'+f});
+ if(db)db.close();db=new SQL.Database(bytes);
+ const tablesResult=db.exec("SELECT name,type FROM sqlite_master WHERE type IN ('table','view') ORDER BY name");
+ if(!tablesResult.length||!tablesResult[0].values.length)throw Error('Tidak ada tabel SQLite yang dikenali; format mungkin khusus atau terenkripsi.');
+ const tables=tablesResult[0].values.map(x=>({name:x[0],type:x[1]}));
+ $('status').textContent=`Berhasil membaca ${name}: ${tables.length} tabel/view ditemukan.`;$('status').className='status';
+ $('tables').innerHTML='';
+ tables.forEach(t=>{const b=document.createElement('button');b.className='btn secondary';b.style.margin='4px';b.textContent=t.name;b.onclick=()=>showGenericTable(t.name);$('tables').appendChild(b)});
+ const tsale=tableExists('tx_tsale'), receipts=tableExists('log_receipt_prn');
+ if(tsale){
+   const rows=db.exec('SELECT * FROM tx_tsale ORDER BY date_tx, faktur');
+   const cols=rows.length?rows[0].columns:[];const vals=rows.length?rows[0].values:[];
+   const idx=n=>cols.findIndex(c=>c.toLowerCase()===n.toLowerCase());
+   const get=(r,n)=>{const i=idx(n);return i<0?null:r[i]};
+   const total=vals.reduce((s,r)=>s+Math.max(0,(Number(get(r,'cash'))||0)-(Number(get(r,'change_pay'))||0))+(Number(get(r,'nom_topup'))||0),0);
+   const dates=[...new Set(vals.map(r=>get(r,'date_tx')).filter(Boolean))];
+   const users=[...new Set(vals.map(r=>get(r,'user_id')).filter(Boolean))];
+   $('userid').textContent=users.join(', ')||'—';
+   $('date').textContent=dates.join(', ')||'—';
+   $('total').textContent='Rp'+Math.round(total).toLocaleString('id-ID');
+   // Derive store name from receipt header where available, otherwise show database store code.
+   if(receipts){
+     const head=db.exec('SELECT header FROM log_receipt_prn WHERE header IS NOT NULL LIMIT 1');
+     if(head.length&&head[0].values[0][0]){
+       const h=String(head[0].values[0][0]).split('|').filter(Boolean);
+       if(h.length>1)$('store').textContent=h[1].trim();
+     } else {
+       const s=db.exec('SELECT store_id FROM tx_tsale LIMIT 1');
+       if(s.length)$('store').textContent=String(s[0].values[0][0]||'P263');
+     }
+   }
+   renderReceiptsFromDb();
+ }else{
+   $('receipts').innerHTML='<div class="empty">Database berhasil dibuka, tetapi tabel tx_tsale tidak ditemukan. Detail struk belum dapat dirangkai otomatis.</div>';
+ }
+}
+function tableExists(name){try{return db.exec("SELECT 1 FROM sqlite_master WHERE type IN ('table','view') AND name='"+name.replace(/'/g,"''")+"'").length>0}catch(e){return false}}
+function renderReceiptsFromDb(){
+ const host=$('receipts');host.innerHTML='';
+ const sale=db.exec('SELECT * FROM tx_tsale ORDER BY date_tx, faktur');
+ if(!sale.length||!sale[0].values.length){host.innerHTML='<div class="empty">Tabel tx_tsale tidak memiliki data transaksi.</div>';return}
+ const cols=sale[0].columns, rows=sale[0].values;
+ const ix=n=>cols.findIndex(c=>c.toLowerCase()===n.toLowerCase());
+ const val=(r,n)=>{const i=ix(n);return i<0?null:r[i]};
+ let receiptMap=new Map();
+ if(tableExists('log_receipt_prn')){
+   const rr=db.exec('SELECT * FROM log_receipt_prn');
+   if(rr.length){
+     const rc=rr[0].columns, ri=n=>rc.findIndex(c=>c.toLowerCase()===n.toLowerCase());
+     rr[0].values.forEach(r=>{
+       const bill=ri('bill_no')>=0?String(r[ri('bill_no')]??''):'';
+       const body=['header','body1','body2','body3','addtl1','addtl2','addtl3','footer'].map(n=>ri(n)>=0?r[ri(n)]||'':'').join('\n').trim();
+       if(bill)receiptMap.set(bill,body);
+     });
+   }
+ }
+ rows.forEach((r,i)=>{
+   const faktur=String(val(r,'faktur')??'');const bill=faktur.slice(-4)||String(i+1);
+   const receiptText=receiptMap.get(String(Number(bill)))||receiptMap.get(bill)||'';
+   const d=document.createElement('details');d.className='receipt';
+   const s=document.createElement('summary');const label=document.createElement('span');label.textContent=faktur||`Struk ${i+1}`;const chev=document.createElement('span');chev.className='chevron';chev.textContent='⌄';s.append(label,chev);
+   const body=document.createElement('div');body.className='receiptbody';
+   const fields=[
+    ['Tanggal',val(r,'date_tx')],['User ID',val(r,'user_id')],['Nomor struk',faktur],
+    ['Total faktur',money(val(r,'total_faktur'))],['Tunai',money(val(r,'cash'))],
+    ['Topup Flazz',money(val(r,'nom_topup'))],['Pembayaran wallet',money(val(r,'wallet'))]
+   ];
+   const t=document.createElement('table');
+   fields.forEach(([k,v])=>{if(v!==null&&v!==''){const tr=document.createElement('tr'),th=document.createElement('th'),td=document.createElement('td');th.textContent=k;td.textContent=v;tr.append(th,td);t.appendChild(tr)}});
+   body.appendChild(t);
+   if(receiptText){const pre=document.createElement('pre');pre.style.whiteSpace='pre-wrap';pre.style.fontFamily='inherit';pre.style.fontSize='12px';pre.style.lineHeight='1.5';pre.textContent=receiptText;body.appendChild(pre)}
+   else {const p=document.createElement('p');p.textContent='Rincian struk tercetak tidak ditemukan di log_receipt_prn untuk nomor ini.';body.appendChild(p)}
+   d.append(s,body);host.appendChild(d);
+   d.addEventListener('toggle',()=>{if(d.open)showReceiptIllustration(r,cols,faktur,receiptText);});
+ });
+ if(rows.length){const first=rows[0];const f=String(val(first,'faktur')??'');const b=f.slice(-4);const txt=receiptMap.get(String(Number(b)))||receiptMap.get(b)||'';showReceiptIllustration(first,cols,f,txt);}
+}
+function showReceiptIllustration(row,cols,faktur,receiptText){
+ const get=n=>{const i=cols.findIndex(c=>c.toLowerCase()===n.toLowerCase());return i<0?null:row[i]};
+ $('receiptTag').textContent=faktur||'----';
+ let content=receiptText||'STRUK TIDAK TERSEDIA\n\nCatatan struk tidak ditemukan pada log_receipt_prn.';
+ $('receiptPaper').textContent=content.replace(/\|/g,'\n').replace(/\n{3,}/g,'\n\n');
+ const total=Number(get('total_faktur'))||0;
+ $('receiptTotal').textContent=money(total)||'Rp0';
+}
+function money(v){if(v===null||v===undefined||v==='')return '';const n=Number(v);return Number.isFinite(n)?'Rp'+Math.round(n).toLocaleString('id-ID'):String(v)}
+function showGenericTable(name){
+ const safe=name.replace(/"/g,'""');let r;try{r=db.exec(`SELECT * FROM "${safe}" LIMIT 200`)}catch(e){return}
+ const host=$('receipts');host.innerHTML='';
+ if(!r.length){host.innerHTML='<div class="empty">Tabel '+name+' tidak memiliki kolom yang dapat ditampilkan.</div>';return}
+ const cols=r[0].columns,values=r[0].values;
+ values.forEach((row,i)=>{const d=document.createElement('details');d.className='receipt';const s=document.createElement('summary');const sp=document.createElement('span');sp.textContent=String(row[0]??`${name} #${i+1}`);const ch=document.createElement('span');ch.className='chevron';ch.textContent='⌄';s.append(sp,ch);const body=document.createElement('div');body.className='receiptbody';const table=document.createElement('table');row.forEach((v,j)=>{const tr=document.createElement('tr'),th=document.createElement('th'),td=document.createElement('td');th.textContent=cols[j];td.textContent=v===null?'NULL':String(v);tr.append(th,td);table.appendChild(tr)});body.appendChild(table);d.append(s,body);host.appendChild(d)});
+ if(!values.length)host.innerHTML='<div class="empty">Tabel '+name+' tidak memiliki baris data.</div>';
+}
+$('search').addEventListener('input',()=>{const q=$('search').value.toLowerCase();document.querySelectorAll('.receipt').forEach(d=>d.style.display=d.querySelector('summary').textContent.toLowerCase().includes(q)?'':'none')});
+</script>
+</body></html>
